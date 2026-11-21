@@ -1250,7 +1250,7 @@
   ];
 
   function getRate(m) {
-    if (m <= 0) return 2000;
+    if (m < 10) return 2000; // 1-9 juta token: harga tetap Rp2.000/juta
     for (let i = 0; i < ratePoints.length - 1; i++) {
       const lo = ratePoints[i], hi = ratePoints[i+1];
       if (m >= lo.m && m <= hi.m) {
@@ -1266,7 +1266,7 @@
     const exact = packs.find(p => p.m === mToken);
     if (exact) return { rp: exact.rp, usd: exact.usd, packName: exact.name, isCustom: false };
     const rate = getRate(mToken);
-    const rp = Math.round(mToken * rate / 500) * 500;
+    const rp = Math.round(mToken * rate / 100) * 100; // bulat ke Rp100 supaya rate turun halus
     const usd = parseFloat((rp / USD_RATE).toFixed(2));
     return { rp, usd, packName: 'Custom', isCustom: true };
   }
