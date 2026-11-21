@@ -69,6 +69,9 @@
     transition: color .2s;
   }
   .nav-links a:hover { color: var(--text); }
+  .nav-links a.nav-cek { border:1px solid var(--accent); color:var(--accent); padding:8px 16px; border-radius:10px; }
+  .nav-links a.nav-cek:hover { background:var(--accent); color:#000; }
+  #cek-token { scroll-margin-top: 90px; }
   .btn {
     display: inline-flex;
     align-items: center;
@@ -736,6 +739,16 @@
     .custom-pricing-header { flex-direction: column; }
     .custom-result { text-align: left; }
   }
+
+  .token-check{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:24px;margin-top:40px}
+  .token-check-title{font-weight:700;font-size:18px;margin-bottom:6px}
+  .token-check-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .token-check-row input{flex:1;min-width:200px;padding:12px 14px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-family:monospace}
+  .token-check-result{margin-top:16px;font-size:14px;color:var(--muted2)}
+  .token-check-result .tc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+  .token-check-result .tc-box{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px}
+  .token-check-result .tc-val{font-size:20px;font-weight:700;color:var(--text)}
+  .token-check-result .tc-err{color:#ef4444}
 </style>
 </head>
 <body>
@@ -744,6 +757,7 @@
 <nav>
   <a href="#" class="logo"><span class="logo-dot"></span> Reis API</a>
   <div class="nav-links">
+    <a href="#cek-token" class="nav-cek">Cek Token</a>
     <a href="#models">Model</a>
     <a href="#pricing">Harga</a>
     <a href="#cara-kerja">Cara Kerja</a>
@@ -751,7 +765,10 @@
     <a href="#komunitas">Komunitas</a>
     <a href="#pricing" class="btn btn-primary">Mulai Sekarang</a>
   </div>
-  <a href="#pricing" class="btn btn-primary" style="display:none" id="mobile-cta">Beli Key</a>
+  <div id="mobile-cta-wrap" style="display:none;gap:8px">
+    <a href="#cek-token" class="btn btn-outlined" style="padding:8px 12px">Cek Token</a>
+    <a href="#pricing" class="btn btn-primary" id="mobile-cta">Beli Key</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -767,7 +784,7 @@
       </div>
       <div class="hero-stats">
         <div class="stat-item">
-          <div class="stat-num">12+</div>
+          <div class="stat-num">28+</div>
           <div class="stat-label">Model AI tersedia</div>
         </div>
         <div class="stat-item">
@@ -775,8 +792,8 @@
           <div class="stat-label">Uptime</div>
         </div>
         <div class="stat-item">
-          <div class="stat-num">2rb+</div>
-          <div class="stat-label">Developer aktif</div>
+          <div class="stat-num">1rb+</div>
+          <div class="stat-label">Pengguna aktif</div>
         </div>
       </div>
     </div>
@@ -792,14 +809,14 @@
         <div style="font-size:13px;color:var(--muted2);margin-top:8px;">Layanan aktif<br>24 jam / 7 hari</div>
       </div>
       <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;">Pengguna Aktif</div>
-        <div style="font-family:'Space Grotesk',sans-serif;font-size:48px;font-weight:700;line-height:1;color:var(--text);">2rb<span style="color:var(--accent2)">+</span></div>
-        <div style="font-size:13px;color:var(--muted2);margin-top:8px;">Developer &amp; builder<br>yang sudah percaya</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;">Pengguna</div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:48px;font-weight:700;line-height:1;color:var(--text);">1rb<span style="color:var(--accent2)">+</span></div>
+        <div style="font-size:13px;color:var(--muted2);margin-top:8px;">Sudah menggunakan<br>Reis API</div>
       </div>
       <div style="background:linear-gradient(135deg,var(--surface) 0%,rgba(34,197,94,0.08) 100%);border:1px solid rgba(34,197,94,0.3);border-radius:16px;padding:28px;">
         <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;">Mulai dari</div>
-        <div style="font-family:'Space Grotesk',sans-serif;font-size:36px;font-weight:700;line-height:1;color:var(--text);">Rp<span style="font-size:44px">40</span><span style="font-size:20px">rb</span></div>
-        <div style="font-size:13px;color:var(--muted2);margin-top:8px;">30 juta token<br>tidak hangus, pakai sampai habis</div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:36px;font-weight:700;line-height:1;color:var(--text);">Rp<span style="font-size:44px">15</span><span style="font-size:20px">rb</span></div>
+        <div style="font-size:13px;color:var(--muted2);margin-top:8px;">10 juta token<br>tidak hangus, pakai sampai habis</div>
       </div>
     </div>
   </div>
@@ -898,6 +915,17 @@
     <h2>Bayar sekali, pakai sampai habis</h2>
     <p class="section-sub">Tidak ada langganan. Tidak ada yang hangus. Token kamu aktif selamanya — sampai tetes terakhir.</p>
 
+    <!-- CEK TOKEN API KEY -->
+    <div class="token-check" id="cek-token">
+      <div class="token-check-title">Cek Sisa Token API Key</div>
+      <div style="font-size:13px;color:var(--muted2)">Masukkan API key kamu untuk cek sisa kuota sebelum beli lagi. Key tidak disimpan.</div>
+      <div class="token-check-row">
+        <input type="password" id="tc-key" placeholder="sk-xxxxxxxxxxxxxxxx" autocomplete="off">
+        <button class="btn btn-primary" id="tc-btn" type="button">Cek Token</button>
+      </div>
+      <div class="token-check-result" id="tc-result"></div>
+    </div>
+
     <!-- CUSTOM PRICING SLIDER -->
     <div class="custom-pricing" style="margin-top:40px; margin-bottom:48px;">
       <div class="custom-pricing-header">
@@ -916,19 +944,35 @@
         <div class="slider-track">
           <div class="slider-fill" id="slider-fill" style="width:0%"></div>
         </div>
-        <input type="range" id="price-slider" min="30" max="500" step="1" value="30">
+        <input type="range" id="price-slider" min="0" max="500" step="1" value="30">
       </div>
       <div class="slider-labels">
-        <span>30M</span><span>155M</span><span>280M</span><span>390M</span><span>500M</span>
+        <span>0</span><span>125M</span><span>250M</span><span>375M</span><span>500M</span>
       </div>
       <div class="pack-name-display" id="pack-name-display">Geser untuk memilih jumlah token yang kamu butuhkan</div>
+      <div style="margin-top:16px; padding:14px 18px; background:rgba(34,197,94,0.06); border:1px solid rgba(34,197,94,0.2); border-radius:10px; font-size:13px; color:var(--muted2); line-height:1.6;">
+        Harga di atas adalah estimasi <strong style="color:var(--text)">token custom</strong>. Kalau kamu beli di angka paket yang tersedia (10M, 30M, 60M, dst), harganya <strong style="color:var(--accent)">lebih murah</strong> — lihat paket di bawah.
+      </div>
       <div class="custom-cta-row">
-        <div class="custom-cta-info">Semua paket sudah termasuk akses ke 12+ model AI</div>
+        <div class="custom-cta-info">Semua paket sudah termasuk akses ke 28+ model AI</div>
         <a id="calc-wa-btn" href="https://wa.me/6285811473623" class="btn btn-primary" target="_blank">Beli via WhatsApp</a>
       </div>
     </div>
 
     <div class="pricing-grid">
+      <!-- LITE -->
+      <div class="price-card">
+        <div class="plan-name">Lite</div>
+        <div class="plan-price"><sup>Rp</sup>15<span style="font-size:18px">rb</span></div>
+        <div class="plan-period">$0,92 · 10M token · tidak expired</div>
+        <div class="plan-desc">Buat yang baru mau coba, tanpa perlu keluar banyak.</div>
+        <ul class="plan-features">
+          <li><span class="check"></span> 10.000.000 token</li>
+          <li><span class="check"></span> Akses semua model</li>
+          <li><span class="check"></span> Support via WA</li>
+        </ul>
+        <a href="https://wa.me/6285811473623?text=Halo%2C+saya+mau+beli+paket+Lite+10M+token+Rp15.000" class="btn btn-outlined btn-plan">Beli Lite</a>
+      </div>
       <!-- STARTER -->
       <div class="price-card">
         <div class="plan-name">Starter</div>
@@ -1141,8 +1185,8 @@
 
 <script>
   // Mobile nav CTA
-  const mobileCta = document.getElementById('mobile-cta');
-  if (window.innerWidth <= 900) mobileCta.style.display = 'inline-flex';
+  const mobileCta = document.getElementById('mobile-cta-wrap');
+  if (window.innerWidth <= 900) mobileCta.style.display = 'flex';
 
   // MODEL TABS
   function switchTab(tab) {
@@ -1160,9 +1204,10 @@
     if (!isOpen) item.classList.add('open');
   }
 
-  // PRICING SLIDER — interpolasi lurus antar paket
+  // PRICING SLIDER
   const USD_RATE = 16300;
   const packs = [
+    { m: 10,  name: 'Lite',     rp: 15000,  usd: 0.92 },
     { m: 30,  name: 'Starter',  rp: 40000,  usd: 2.19 },
     { m: 60,  name: 'Basic',    rp: 75000,  usd: 4.11 },
     { m: 120, name: 'Medium',   rp: 130000, usd: 7.14 },
@@ -1172,30 +1217,39 @@
     { m: 500, name: 'MAX+',     rp: 450000, usd: 24.66 },
   ];
 
-  function calcPrice(mToken) {
-    // Exact match
-    const exact = packs.find(p => p.m === mToken);
-    if (exact) return { rp: exact.rp, usd: exact.usd, packName: exact.name, isCustom: false };
+  // Rate per juta token: mulai 2000 di 0M, turun smooth ke rate paket
+  const ratePoints = [
+    { m: 0,   rate: 2000 },
+    { m: 10,  rate: 15000/10 },
+    { m: 30,  rate: 40000/30 },
+    { m: 60,  rate: 75000/60 },
+    { m: 120, rate: 130000/120 },
+    { m: 240, rate: 250000/240 },
+    { m: 300, rate: 310000/300 },
+    { m: 400, rate: 375000/400 },
+    { m: 500, rate: 450000/500 },
+  ];
 
-    // Di atas paket tertinggi — ekstrapolasi lurus dari 2 paket terakhir
-    if (mToken > packs[packs.length - 1].m) {
-      const a = packs[packs.length - 2], b = packs[packs.length - 1];
-      const ratio = (mToken - a.m) / (b.m - a.m);
-      const rp = Math.round((a.rp + (b.rp - a.rp) * ratio) / 1000) * 1000;
-      const usd = a.usd + (b.usd - a.usd) * ratio;
-      return { rp, usd, packName: 'Custom', isCustom: true };
-    }
-
-    // Interpolasi antar dua paket
-    for (let i = 0; i < packs.length - 1; i++) {
-      const lo = packs[i], hi = packs[i + 1];
-      if (mToken > lo.m && mToken < hi.m) {
-        const ratio = (mToken - lo.m) / (hi.m - lo.m);
-        const rp = Math.round((lo.rp + (hi.rp - lo.rp) * ratio) / 1000) * 1000;
-        const usd = lo.usd + (hi.usd - lo.usd) * ratio;
-        return { rp, usd, packName: 'Custom', isCustom: true };
+  function getRate(m) {
+    if (m <= 0) return 2000;
+    for (let i = 0; i < ratePoints.length - 1; i++) {
+      const lo = ratePoints[i], hi = ratePoints[i+1];
+      if (m >= lo.m && m <= hi.m) {
+        const t = (m - lo.m) / (hi.m - lo.m);
+        return lo.rate + (hi.rate - lo.rate) * t;
       }
     }
+    return ratePoints[ratePoints.length-1].rate;
+  }
+
+  function calcPrice(mToken) {
+    if (mToken === 0) return { rp: 0, usd: 0, packName: 'Custom', isCustom: true };
+    const exact = packs.find(p => p.m === mToken);
+    if (exact) return { rp: exact.rp, usd: exact.usd, packName: exact.name, isCustom: false };
+    const rate = getRate(mToken);
+    const rp = Math.round(mToken * rate / 500) * 500;
+    const usd = parseFloat((rp / USD_RATE).toFixed(2));
+    return { rp, usd, packName: 'Custom', isCustom: true };
   }
 
   const slider = document.getElementById('price-slider');
@@ -1203,22 +1257,22 @@
 
   function updateSlider() {
     const mToken = parseInt(slider.value);
-    const pct = ((mToken - 30) / (500 - 30)) * 100;
+    const pct = (mToken / 500) * 100;
     fill.style.width = pct + '%';
 
     const { rp, usd, packName, isCustom } = calcPrice(mToken);
 
-    document.getElementById('calc-token').textContent = mToken + ' juta token';
-    document.getElementById('calc-rp').textContent = rp.toLocaleString('id-ID');
-    document.getElementById('calc-usd').textContent = '≈ $' + usd.toFixed(2);
+    document.getElementById('calc-token').textContent = mToken === 0 ? '0 token' : mToken + ' juta token';
+    document.getElementById('calc-rp').textContent = rp === 0 ? '0' : rp.toLocaleString('id-ID');
+    document.getElementById('calc-usd').textContent = usd === 0 ? '≈ $0.00' : '≈ $' + usd.toFixed(2);
     document.getElementById('calc-pack').textContent = isCustom ? ' Custom' : packName;
 
     const descEl = document.getElementById('pack-name-display');
     if (isCustom) {
-      descEl.textContent = `${mToken}M token — Rp${Math.round(rp / mToken).toLocaleString('id-ID')} per juta token`;
+      descEl.textContent = `Custom ${mToken}M token — Rp${Math.round(rp / mToken).toLocaleString('id-ID')}/juta · Beli paket di bawah untuk harga lebih hemat`;
       descEl.style.color = 'var(--accent2)';
     } else {
-      descEl.textContent = `Paket ${packName} — harga standar`;
+      descEl.textContent = `Paket ${packName} — harga terbaik, lebih hemat dari token custom`;
       descEl.style.color = 'var(--accent)';
     }
 
@@ -1231,6 +1285,38 @@
 
   slider.addEventListener('input', updateSlider);
   updateSlider();
+
+  // ===== CEK TOKEN API KEY =====
+  // GANTI dengan base URL API kamu (tanpa slash di akhir)
+  // URL Cloudflare Worker (proxy CORS ke api.vanns.my.id)
+  const API_BASE = 'https://reis-balance.reisyaridho8.workers.dev';
+  (function(){
+    const btn=document.getElementById('tc-btn'), inp=document.getElementById('tc-key'), out=document.getElementById('tc-result');
+    const fmt=n=>Math.round(n).toLocaleString('id-ID');
+    async function check(){
+      const key=inp.value.trim();
+      if(!key){out.innerHTML='<span class="tc-err">Masukkan API key dulu.</span>';return;}
+      btn.disabled=true; out.textContent='Mengecek...';
+      const h={Authorization:'Bearer '+key};
+      try{
+        const r=await fetch(API_BASE+'/v1/balance',{headers:h});
+        const j=await r.json().catch(()=>({}));
+        if(!r.ok) throw new Error(r.status===401?'API key tidak valid atau tidak aktif.':((j.error&&j.error.message)||'Gagal cek ('+r.status+').'));
+        // Format respons /v1/balance: {tokens, midnight:{tokens,window,active_now}, daily:{tokens,until}, unlimited_until}
+        const box=(l,v,sub)=>`<div class="tc-box">${l}<div class="tc-val">${v}</div>${sub?`<div style="font-size:12px;margin-top:4px">${sub}</div>`:''}</div>`;
+        const tgl=x=>x?new Date(x).toLocaleString('id-ID'):'';
+        let html=box('Sisa token', j.unlimited_until?'Unlimited':fmt(j.tokens||0), j.unlimited_until?'s/d '+tgl(j.unlimited_until):'');
+        if(j.daily&&j.daily.tokens>0) html+=box('Token harian',fmt(j.daily.tokens),j.daily.until?'s/d '+tgl(j.daily.until):'');
+        if(j.midnight&&j.midnight.tokens>0) html+=box('Token midnight',fmt(j.midnight.tokens),(j.midnight.window||'')+(j.midnight.active_now?' · aktif':''));
+        out.innerHTML=`<div class="tc-grid">${html}</div>
+        <div style="margin-top:10px">Mau tambah kuota? Pilih paket di bawah — kuota langsung masuk ke key yang sama.</div>`;
+      }catch(e){
+        out.innerHTML='<span class="tc-err">'+(e.message||'Gagal terhubung ke server.')+'</span>';
+      }finally{btn.disabled=false;}
+    }
+    btn.addEventListener('click',check);
+    inp.addEventListener('keydown',e=>{if(e.key==='Enter')check();});
+  })();
 </script>
 </body>
 </html>
