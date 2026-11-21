@@ -533,6 +533,25 @@
     footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
     .models-grid { grid-template-columns: 1fr 1fr; }
   }
+  /* Cegah elemen lebar (kode, grid) bikin halaman melebar di HP */
+  html, body { max-width: 100%; overflow-x: hidden; }
+  .hero-inner > *, .section-inner > *, .pricing-grid > *, .steps-grid > *, .models-grid > * { min-width: 0; }
+  pre { max-width: 100%; }
+  img, video, iframe { max-width: 100%; }
+  @media (max-width: 900px) { .hero-cta .btn { white-space: normal; text-align: center; } }
+  /* Nav HP: logo + 2 tombol muat di layar sempit */
+  @media (max-width: 900px) {
+    #mobile-cta-wrap .btn { padding: 8px 12px; font-size: 13px; white-space: nowrap; }
+  }
+  @media (max-width: 420px) {
+    nav { padding: 12px 16px; }
+    .logo { font-size: 17px; }
+    #mobile-cta-wrap { gap: 6px !important; }
+    #mobile-cta-wrap .btn { padding: 7px 10px; font-size: 12px; }
+    .token-check { padding: 18px; }
+    .token-check-row input { min-width: 0; width: 100%; }
+    .token-check-row .btn { width: 100%; justify-content: center; }
+  }
   @media (max-width: 540px) {
     .steps-grid { grid-template-columns: 1fr; }
     .models-grid { grid-template-columns: 1fr; }
@@ -766,7 +785,7 @@
     <a href="#pricing" class="btn btn-primary">Mulai Sekarang</a>
   </div>
   <div id="mobile-cta-wrap" style="display:none;gap:8px">
-    <a href="#cek-token" class="btn btn-outlined" style="padding:8px 12px">Cek Token</a>
+    <a href="#cek-token" class="btn btn-outlined">Cek Token</a>
     <a href="#pricing" class="btn btn-primary" id="mobile-cta">Beli Key</a>
   </div>
 </nav>
